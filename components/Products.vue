@@ -3,14 +3,15 @@
     <h2 class="text-xl text-left text-gray-900">Merchants</h2>
     <section class="py-4">
       <div class="flex justify-between -mx-3 mb-2">
-        <input v-model="query" @input="type = 'search'" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="merchant" type="text" placeholder="search merchant">
+        <input v-model="search" v-on:keyup="getFilteredData" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="merchant" type="text" placeholder="search merchant">
         <div class="flex">
           <div class="px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
               Category
             </label>
             <div class="relative">
-              <select v-model="category" @change="type = 'category'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+              <select v-model="category" @change="getFilteredData" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option value="all">all merchant</option>
                 <option value="product">product merchant</option>
                 <option value="service">service merchant</option>
               </select>
@@ -24,7 +25,7 @@
               Order
             </label>
             <div class="relative">
-              <select v-model="order" @change="type = 'order'" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+              <select v-model="order" @change="getFilteredData" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                 <option value="ascending">ascending</option>
                 <option value="descending">descending</option>
               </select>
@@ -46,68 +47,61 @@
 
 <script>
 import Product from './Product.vue';
+import Search from './Search.vue';
 import products from '../assets/products.json';
 export default {
   name: 'products',
   components:{
     Product,
+    Search
   },
   data(){
     return {
       products: products,
-      query: '',
-      category: '',
+      filteredProducts: [],
+      search: '',
+      category: 'all',
       order: '',
       type: null,
     }
   },
-  computed:{
-    filteredProducts() {
-        switch (this.type) {
-          case 'search':
-            var filter = new RegExp(this.query, 'i')
-            return this.products.filter(el => el.title.match(filter))
-            break;
-          case 'category':
-            var filter = new RegExp(this.category, 'i')
-            return this.products.filter(el => el.type.match(filter))
-            break;
-          // case 'order':
-          //   return this.products.filter(el => el.title.match(filter))
-          //   break;
-        
-          default:
-            return this.products
-        }
-        // if(this.type === 'search'){
-        //   return this.products.filter(el => el.title.match(filter))
-        // }
-        // else if (this.type === 'category') {
-        //   return this.product.filter(el => el.type.match(filter))
-        // } else {
-          
-        // }
-      
-    },
-    // categorizedProducts(){
-    //   let filter = new RegExp(this.category, 'i')
-    //   console.log(this.filteredProducts.filter(el => el.type.match(filter)))
-    //   return this.filteredProducts.filter(el => el.type.match(filter))
-    // }
+  mounted() {
+    this.getFilteredData();
   },
   methods:{
-    sortProducts(type){
-      switch (type === 'category') {
-        case value:
-          
-      
-        default:
+    getFilteredData: function() {
+      this.filteredProducts = products;
+      let filteredDataByfilters = [];
+      let filteredDataBySearch = [];
+
+      // first check if filters where selected
+      if (this.category !== 'all') {
+        let filter = new RegExp(this.category, 'i')
+        filteredDataByfilters = this.filteredProducts.filter(el => el.type.match(filter))
+        this.filteredProducts = filteredDataByfilters;
       }
-      let filter = new RegExp(this.category, 'i')
-      console.log(this.filteredProducts.filter(el => el.type.match(filter)))
-      this.filteredProducts = this.filteredProducts.filter(el => el.type.match(filter))
-      // return this.filteredProducts.filter(el => el.type.match(filter))
+
+      if (this.order !== "") {
+        this.filteredProducts.sort((a, b) =>
+          this.order === "ascending"
+            ? a.title > b.title
+              ? 1
+              : -1
+            : a.title < b.title
+              ? 1
+              : -1
+        );
+      } else {
+        this.filteredProducts.sort((a, b) => (a.id > b.id ? 1 : -1));
+      }
+
+      // then filter according to keyword, this only affects the title attribute of each data
+      if (this.search !== '') {
+        let filter = new RegExp(this.search, 'i')
+        filteredDataBySearch = this.filteredProducts.filter(el => el.title.match(filter))
+        this.filteredProducts = filteredDataBySearch;
+      }
     }
-  }
+  },
 }
 </script>

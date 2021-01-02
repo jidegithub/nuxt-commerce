@@ -17,9 +17,10 @@
 <script>
 export default {
   name: 'search',
+  props: ['query', 'products'],
   data(){
     return{
-      query: '',
+      // query: '',
     }
   }
 }
