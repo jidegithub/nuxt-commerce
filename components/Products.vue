@@ -3,7 +3,7 @@
     <h2 class="text-xl text-left text-gray-900">Merchants</h2>
     <section class="py-4">
       <div class="flex justify-between -mx-3 mb-2">
-        <input v-model="search" v-on:keyup="getFilteredData" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="merchant" type="text" placeholder="search merchant">
+        <Search query="title" :products="products"/>
         <div class="flex">
           <div class="px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -59,7 +59,7 @@ export default {
     return {
       products: products,
       filteredProducts: [],
-      search: '',
+      query: '',
       category: 'all',
       order: '',
       type: null,
@@ -96,8 +96,8 @@ export default {
       }
 
       // then filter according to keyword, this only affects the title attribute of each data
-      if (this.search !== '') {
-        let filter = new RegExp(this.search, 'i')
+      if (this.query !== '') {
+        let filter = new RegExp(this.query, 'i')
         filteredDataBySearch = this.filteredProducts.filter(el => el.title.match(filter))
         this.filteredProducts = filteredDataBySearch;
       }

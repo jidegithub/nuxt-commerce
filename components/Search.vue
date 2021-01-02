@@ -4,7 +4,7 @@
       Find Merchants
     </label>
     <span>
-      <input v-model="query" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="merchant" type="text" placeholder="search merchant">
+      <input v-model="searchString" v-on:input="search" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="merchant" type="text" placeholder="search merchant">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="search-box-icon-container" width="21" height="21" viewBox="0 0 24 24" stroke-width="2" stroke="#cbc8c8" data-icon="search" role="img" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z"></path>
           <circle cx="10" cy="10" r="7"></circle>
@@ -17,10 +17,16 @@
 <script>
 export default {
   name: 'search',
-  props: ['query', 'products'],
+  props: { products: Array, query: String },
   data(){
     return{
-      // query: '',
+      searchString: '',
+      results: [],
+    }
+  },
+  methods:{
+    search(){
+      this.results = this.products.filter(item => item[this.query].toLowerCase().includes(this.searchString.toLowerCase()));
     }
   }
 }
