@@ -3,7 +3,7 @@
     <h2 class="text-xl text-left text-gray-900">Merchants</h2>
     <section class="py-4">
       <div class="flex justify-between -mx-3 mb-2">
-        <Search query="title" :products="products"/>
+        <Search query="title" :products="products" @currentResult="getResult"/>
         <div class="flex">
           <div class="px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -59,6 +59,7 @@ export default {
     return {
       products: products,
       filteredProducts: [],
+      filteredDataBySearch: [],
       query: '',
       category: 'all',
       order: '',
@@ -72,7 +73,8 @@ export default {
     getFilteredData: function() {
       this.filteredProducts = products;
       let filteredDataByfilters = [];
-      let filteredDataBySearch = [];
+      // let filteredDataBySearch = [];
+      this.filteredDataBySearch = [];
 
       // first check if filters where selected
       if (this.category !== 'all') {
@@ -97,10 +99,14 @@ export default {
 
       // then filter according to keyword, this only affects the title attribute of each data
       if (this.query !== '') {
-        let filter = new RegExp(this.query, 'i')
-        filteredDataBySearch = this.filteredProducts.filter(el => el.title.match(filter))
-        this.filteredProducts = filteredDataBySearch;
+        // let filter = new RegExp(this.query, 'i')
+        // filteredDataBySearch = this.filteredProducts.filter(el => el.title.match(filter))
+        // this.filteredProducts = filteredDataBySearch;
       }
+    },
+    getResult (result) {
+      this.filteredDataBySearch = result
+      this.filteredProducts = this.filteredDataBySearch;
     }
   },
 }

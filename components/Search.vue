@@ -27,7 +27,8 @@ export default {
   methods:{
     search(){
       this.results = this.products.filter(item => item[this.query].toLowerCase().includes(this.searchString.toLowerCase()));
-    }
+      this.$emit('currentResult', this.results)
+    },
   }
 }
 </script>
