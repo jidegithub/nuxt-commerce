@@ -1,17 +1,20 @@
 <template>
   <div class="container">
-    <div>
+    <section class="flex flex-wrap">
+      <Hero/>
       <Products/>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
 import Products from '../components/Products.vue';
+import Hero from '../components/Hero.vue';
 export default {
   name: 'index',
   components:{
-    Products
+    Products,
+    Hero,
   }
 }
 </script>

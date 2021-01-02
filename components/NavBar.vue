@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-gray-900 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
+  <header class="bg-gray-900 sm:flex sm:justify-between sm:items-center sm:py-3">
     <div class="flex items-center justify-between px-4 py-3 sm:p-0">
       <div>
         <img class="h-8" src='../assets/logo.svg' alt="Workcation">
@@ -14,7 +14,6 @@
       </div>
     </div>
     <nav :class="isOpen ? 'block' : 'hidden'" class="px-2 pt-2 pb-4 sm:flex sm:p-0">
-      <a href="#" class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">List your property</a>
       <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Trips</a>
       <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Messages</a>
     </nav>
@@ -30,3 +29,9 @@ export default {
   },
 }
 </script>
+<style scoped>
+header{
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+</style>
