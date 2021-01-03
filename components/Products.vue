@@ -2,10 +2,10 @@
   <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto py-8">
     <h2 class="text-xl text-left text-gray-900">Merchants</h2>
     <section class="py-4">
-      <div class="flex justify-between -mx-3 mb-2">
+      <div class="flex justify-between sm:flex-row md:flex-row flex-col -mx-3 mb-2">
         <Search query="title" :products="products" @currentResult="getResult"/>
         <div class="flex">
-          <div class="px-3 mb-6 md:mb-0">
+          <div class="px-3 mb-6 md:mb-0 w-1/2">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
               Category
             </label>
@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <div class="px-3 mb-6 md:mb-0">
+          <div class="px-3 mb-6 md:mb-0 w-1/2">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
               Order
             </label>
@@ -37,7 +37,7 @@
         </div>
       </div>
     </section>
-    <div class="flex flex-wrap -mx-4">
+    <div class="flex flex-wrap mx-0 sm:-mx-4 md:-mx-4">
       <div class="mt-6 w-full px-4 lg:w-1/3 xl:w-1/3" v-for="product in filteredProducts" :key="product.id">
         <Product :product="product"/>
       </div>

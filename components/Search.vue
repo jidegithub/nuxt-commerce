@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative md:w-3/12 px-3 mb-6 md:mb-0">
+  <div class="inline-block relative px-3 mb-6 md:mb-0">
     <label class="block uppercase tracking-wide text-gray-700 text-left text-xs font-bold mb-2" for="grid-city">
       Find Merchants
     </label>
