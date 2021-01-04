@@ -38,7 +38,7 @@
       </div>
     </section>
     <div class="flex flex-wrap mx-0 sm:-mx-4 md:-mx-4">
-      <div class="mt-6 w-full px-4 lg:w-1/3 xl:w-1/3" v-for="product in filteredProducts" :key="product.id">
+      <div class="mt-6 w-full px-4 lg:w-1/4 xl:w-1/4" v-for="product in filteredProducts" :key="product.id">
         <Product :product="product"/>
       </div>
     </div>
