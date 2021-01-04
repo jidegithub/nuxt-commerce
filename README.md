@@ -1,4 +1,4 @@
-# nuxt-coomerce
+# nuxt-commerce
 
 ## Build Setup
 
