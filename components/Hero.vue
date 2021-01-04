@@ -1,26 +1,29 @@
 <template>
-  <div class="max-w-md sm:max-w-xl lg:max-w-6xl mx-auto pt-4 carousel-cont">
-    <carousel >
-      <carousel-slide v-for="slide in slides" :key="slide" class="carousel-slider">
+<section class="pt-4 max-w-md mx-auto sm:max-w-xl lg:max-w-full">
+  <div class="">
+    <carousel :scrollPerPage="true" :perPage=1 :navigationEnabled="true" :paginationEnabled="false">
+      <slide v-for="slide in slides" :key="slide">
         <img :src="slide" :alt="slide">
-      </carousel-slide>
+      </slide>
     </carousel>
-    <!-- <div class="px-8 py-12 max-w-md mx-auto sm:max-w-xl lg:max-w-full lg:w-1/2 lg:py-24 lg:px-12"> -->
-      <!-- <Slider/> -->
-    <!-- </div> -->
   </div>
+</section>
+  
 </template>
 
 <script>
 import Slider from './Slider.vue';
-import Carousel from './carousel/Carousel.vue';
+// import Carousel from './carousel/Carousel.vue';
 import CarouselSlide from './carousel/CarouselSlide.vue';
+import { Carousel, Slide } from 'vue-carousel';
 export default {
   name: 'hero',
   components: {
     Slider,
-    Carousel: Carousel,
+    // Carousel: Carousel,
     CarouselSlide: CarouselSlide,
+    Carousel,
+    Slide
   },
   data(){
     return{
@@ -39,6 +42,19 @@ export default {
 </script>
 
 <style>
+  div .VueCarousel-slide{
+    width: 10rem;
+    /* height: 100%; */
+  }
+  /* .VueCarousel-slide{
+    width: 900px;
+    height: 500px;
+  } */
+
+  img{
+    width:600px;
+    height: 100%;
+  }
   .carousel-cont {
     display:flex;
     justify-content: center;
