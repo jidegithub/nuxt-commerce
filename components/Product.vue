@@ -5,13 +5,12 @@
       <div class="flex items-baseline">
         <span class="inline-block bg-teal-200 text-teal-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">New</span>
         <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">
-          {{ product.beds }} beds &bull; {{ product.baths }} baths
+          {{ product.type }}
         </div>
       </div>
       <h4 class="mt-1 font-semibold text-lg leading-tight truncate">{{ product.title }}</h4>
       <div class="mt-1">
-        {{ product.formattedPrice }}
-        <span class="text-gray-600 text-sm"> / wk</span>
+        <span class="text-gray-600 text-sm">starting from</span> {{ product.formattedPrice }}
       </div>
       <div class="mt-2 flex items-center">
         <svg v-for="i in 5" :key="i" viewBox="0 0 24 24" :class="i <= product.rating ? 'text-teal-500' : 'text-gray-400'" class="h-4 w-4 fill-current">
